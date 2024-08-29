@@ -25,6 +25,14 @@ nav{
     margin-bottom: 20px;
   }
   
+  .star-rating {
+    display: flex; 
+    gap: 10px; 
+    flex-direction: row;
+    vertical-align: middle;
+    align-items: flex-end;
+  }
+
   .feedback-form input[type="text"],
   .feedback-form input[type="email"],
   .feedback-form textarea {

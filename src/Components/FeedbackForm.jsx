@@ -4,10 +4,11 @@ import './FeedbackForm.css'; // Import CSS for styling
 const FeedbackForm = () => {
 
     const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    feedback: ''
-  });
+        name: '',
+        email: '',
+        feedback: '',
+        rating: ''
+    });
 
   const handleChange = (event) => {
     const fieldName = event.target.name;
@@ -21,13 +22,23 @@ const FeedbackForm = () => {
 
     const confirmationMessage = {...formData};
     let isConfirmed = false;
+    const numStars = parseInt(formData.rating);
+    const stars  = "⭐".repeat(numStars);
 
-    isConfirmed = window.confirm("Please confirm your details: \n" + confirmationMessage.name + ": " + confirmationMessage.email + " \n" +  confirmationMessage.feedback);
+    isConfirmed = window.confirm(
+        "Please confirm your details: \n" 
+        + confirmationMessage.name + ": " 
+        + confirmationMessage.email + " \n" +  stars + " \n" 
+        + confirmationMessage.feedback);
 
     if(isConfirmed){
-        console.log("---Feedback---\n", confirmationMessage.name, " ", confirmationMessage.email, "\n",  confirmationMessage.feedback)
+        console.log("---Feedback---\n", 
+            confirmationMessage.name, " ", 
+            confirmationMessage.email, "\n",
+            stars, "\n",
+            confirmationMessage.feedback);
         alert("Thank you for your submission");
-        setFormData({name: '', email: '', feedback: ''});
+        setFormData({name: '', email: '', feedback: '', rating: ''});
     }
   }
 
@@ -47,6 +58,19 @@ const FeedbackForm = () => {
             placeholder='example@website.com' 
             onChange={handleChange}
             value={formData.email}/>
+        <p className='star-rating'>⭐  
+            <span>Rate Us:</span>
+            <div><input type='radio' name='rating' value='1'
+                onChange={handleChange}/> 1</div>
+            <div><input type='radio' name='rating' value='2'
+                onChange={handleChange}/> 2</div>
+            <div><input type='radio' name='rating' value='3'
+                onChange={handleChange}/> 3</div>
+            <div><input type='radio' name='rating' value='4'
+                onChange={handleChange}/> 4</div>
+            <div><input type='radio' name='rating' value='5'
+                onChange={handleChange}/> 5</div>
+        ⭐</p>
         <textarea name='feedback' 
             placeholder='Your feedback'
             onChange={handleChange}
